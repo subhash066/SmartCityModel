@@ -1,0 +1,223 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &2021542668633323041
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 191086, guid: 12e4450028433344a81a6359e525182e, type: 3}
+      propertyPath: m_Name
+      value: TL_PostWithLights_Diag_W Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 426770, guid: 12e4450028433344a81a6359e525182e, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 426770, guid: 12e4450028433344a81a6359e525182e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 8.69
+      objectReference: {fileID: 0}
+    - target: {fileID: 426770, guid: 12e4450028433344a81a6359e525182e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 426770, guid: 12e4450028433344a81a6359e525182e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 5.88
+      objectReference: {fileID: 0}
+    - target: {fileID: 426770, guid: 12e4450028433344a81a6359e525182e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071067
+      objectReference: {fileID: 0}
+    - target: {fileID: 426770, guid: 12e4450028433344a81a6359e525182e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 426770, guid: 12e4450028433344a81a6359e525182e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 426770, guid: 12e4450028433344a81a6359e525182e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11403338, guid: 12e4450028433344a81a6359e525182e, type: 3}
+      propertyPath: RedHalo
+      value: 
+      objectReference: {fileID: 2021542668633234857}
+    - target: {fileID: 11403338, guid: 12e4450028433344a81a6359e525182e, type: 3}
+      propertyPath: GreenHalo
+      value: 
+      objectReference: {fileID: 2021542668633239267}
+    - target: {fileID: 11403338, guid: 12e4450028433344a81a6359e525182e, type: 3}
+      propertyPath: YellowHalo
+      value: 
+      objectReference: {fileID: 2021542668633191497}
+    - target: {fileID: 11403338, guid: 12e4450028433344a81a6359e525182e, type: 3}
+      propertyPath: LightsOnMat
+      value: 
+      objectReference: {fileID: 2100000, guid: 0ab04fff13d1ecc4f82625a094f57220, type: 2}
+    - target: {fileID: 11403338, guid: 12e4450028433344a81a6359e525182e, type: 3}
+      propertyPath: RedRenderer
+      value: 
+      objectReference: {fileID: 2021542668630976247}
+    - target: {fileID: 11403338, guid: 12e4450028433344a81a6359e525182e, type: 3}
+      propertyPath: LightsOffMat
+      value: 
+      objectReference: {fileID: 2100000, guid: 1a922bc1420bdb94c946879d38be417c, type: 2}
+    - target: {fileID: 11403338, guid: 12e4450028433344a81a6359e525182e, type: 3}
+      propertyPath: RedLightHalo
+      value: 
+      objectReference: {fileID: 2021542668633234857}
+    - target: {fileID: 11403338, guid: 12e4450028433344a81a6359e525182e, type: 3}
+      propertyPath: GreenRenderer
+      value: 
+      objectReference: {fileID: 2021542668631036579}
+    - target: {fileID: 11403338, guid: 12e4450028433344a81a6359e525182e, type: 3}
+      propertyPath: GreenLightHalo
+      value: 
+      objectReference: {fileID: 2021542668633239267}
+    - target: {fileID: 11403338, guid: 12e4450028433344a81a6359e525182e, type: 3}
+      propertyPath: YellowRenderer
+      value: 
+      objectReference: {fileID: 2021542668631048343}
+    - target: {fileID: 11403338, guid: 12e4450028433344a81a6359e525182e, type: 3}
+      propertyPath: YellowLightHalo
+      value: 
+      objectReference: {fileID: 2021542668633191497}
+    - target: {fileID: 11403338, guid: 12e4450028433344a81a6359e525182e, type: 3}
+      propertyPath: RedLightRenderer
+      value: 
+      objectReference: {fileID: 2021542668630976247}
+    - target: {fileID: 11403338, guid: 12e4450028433344a81a6359e525182e, type: 3}
+      propertyPath: GreenLightRenderer
+      value: 
+      objectReference: {fileID: 2021542668631036579}
+    - target: {fileID: 11403338, guid: 12e4450028433344a81a6359e525182e, type: 3}
+      propertyPath: YellowLightRenderer
+      value: 
+      objectReference: {fileID: 2021542668631048343}
+    - target: {fileID: 11457554, guid: 12e4450028433344a81a6359e525182e, type: 3}
+      propertyPath: RedHalo
+      value: 
+      objectReference: {fileID: 2021542668633279657}
+    - target: {fileID: 11457554, guid: 12e4450028433344a81a6359e525182e, type: 3}
+      propertyPath: GreenHalo
+      value: 
+      objectReference: {fileID: 2021542668633287391}
+    - target: {fileID: 11457554, guid: 12e4450028433344a81a6359e525182e, type: 3}
+      propertyPath: YellowHalo
+      value: 
+      objectReference: {fileID: 2021542668633213413}
+    - target: {fileID: 11457554, guid: 12e4450028433344a81a6359e525182e, type: 3}
+      propertyPath: LightsOnMat
+      value: 
+      objectReference: {fileID: 2100000, guid: 0ab04fff13d1ecc4f82625a094f57220, type: 2}
+    - target: {fileID: 11457554, guid: 12e4450028433344a81a6359e525182e, type: 3}
+      propertyPath: RedRenderer
+      value: 
+      objectReference: {fileID: 2021542668631020719}
+    - target: {fileID: 11457554, guid: 12e4450028433344a81a6359e525182e, type: 3}
+      propertyPath: LightsOffMat
+      value: 
+      objectReference: {fileID: 2100000, guid: 1a922bc1420bdb94c946879d38be417c, type: 2}
+    - target: {fileID: 11457554, guid: 12e4450028433344a81a6359e525182e, type: 3}
+      propertyPath: RedLightHalo
+      value: 
+      objectReference: {fileID: 2021542668633279657}
+    - target: {fileID: 11457554, guid: 12e4450028433344a81a6359e525182e, type: 3}
+      propertyPath: GreenRenderer
+      value: 
+      objectReference: {fileID: 2021542668630992979}
+    - target: {fileID: 11457554, guid: 12e4450028433344a81a6359e525182e, type: 3}
+      propertyPath: GreenLightHalo
+      value: 
+      objectReference: {fileID: 2021542668633287391}
+    - target: {fileID: 11457554, guid: 12e4450028433344a81a6359e525182e, type: 3}
+      propertyPath: YellowRenderer
+      value: 
+      objectReference: {fileID: 2021542668630965255}
+    - target: {fileID: 11457554, guid: 12e4450028433344a81a6359e525182e, type: 3}
+      propertyPath: YellowLightHalo
+      value: 
+      objectReference: {fileID: 2021542668633213413}
+    - target: {fileID: 11457554, guid: 12e4450028433344a81a6359e525182e, type: 3}
+      propertyPath: RedLightRenderer
+      value: 
+      objectReference: {fileID: 2021542668631020719}
+    - target: {fileID: 11457554, guid: 12e4450028433344a81a6359e525182e, type: 3}
+      propertyPath: GreenLightRenderer
+      value: 
+      objectReference: {fileID: 2021542668630992979}
+    - target: {fileID: 11457554, guid: 12e4450028433344a81a6359e525182e, type: 3}
+      propertyPath: YellowLightRenderer
+      value: 
+      objectReference: {fileID: 2021542668630965255}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 12e4450028433344a81a6359e525182e, type: 3}
+--- !u!23 &2021542668630965255 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2361894, guid: 12e4450028433344a81a6359e525182e, type: 3}
+  m_PrefabInstance: {fileID: 2021542668633323041}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &2021542668630976247 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2379990, guid: 12e4450028433344a81a6359e525182e, type: 3}
+  m_PrefabInstance: {fileID: 2021542668633323041}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &2021542668630992979 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2399858, guid: 12e4450028433344a81a6359e525182e, type: 3}
+  m_PrefabInstance: {fileID: 2021542668633323041}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &2021542668631020719 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2302606, guid: 12e4450028433344a81a6359e525182e, type: 3}
+  m_PrefabInstance: {fileID: 2021542668633323041}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &2021542668631036579 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2319490, guid: 12e4450028433344a81a6359e525182e, type: 3}
+  m_PrefabInstance: {fileID: 2021542668633323041}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &2021542668631048343 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2340534, guid: 12e4450028433344a81a6359e525182e, type: 3}
+  m_PrefabInstance: {fileID: 2021542668633323041}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2021542668633191497 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 131688, guid: 12e4450028433344a81a6359e525182e, type: 3}
+  m_PrefabInstance: {fileID: 2021542668633323041}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2021542668633213413 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 180164, guid: 12e4450028433344a81a6359e525182e, type: 3}
+  m_PrefabInstance: {fileID: 2021542668633323041}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2021542668633234857 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 191368, guid: 12e4450028433344a81a6359e525182e, type: 3}
+  m_PrefabInstance: {fileID: 2021542668633323041}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2021542668633239267 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 186562, guid: 12e4450028433344a81a6359e525182e, type: 3}
+  m_PrefabInstance: {fileID: 2021542668633323041}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2021542668633279657 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 113288, guid: 12e4450028433344a81a6359e525182e, type: 3}
+  m_PrefabInstance: {fileID: 2021542668633323041}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2021542668633287391 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 105726, guid: 12e4450028433344a81a6359e525182e, type: 3}
+  m_PrefabInstance: {fileID: 2021542668633323041}
+  m_PrefabAsset: {fileID: 0}
