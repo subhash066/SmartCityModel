@@ -50,7 +50,7 @@ namespace HealthbarGames
             else
             {
                 mInitialized = false;
-                Debug.LogError("Some variables haven't been assigned correctly for HaloTrafficLight script.", this);
+                Debug.LogError("Some variables haven't been assigned correctly for RealTrafficLight script.", this);
             }
         }
 
