@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using StarterAssets;
 
 public class PlayerHitResponse : MonoBehaviour
@@ -7,6 +8,9 @@ public class PlayerHitResponse : MonoBehaviour
     private ThirdPersonController _tpController;
     private Vector3 _impactVelocity;
     private float _impactTimer;
+
+    private int _hitCount = 0;
+    private const int MaxHits = 2;
 
     void Start()
     {
@@ -26,11 +30,12 @@ public class PlayerHitResponse : MonoBehaviour
 
     public void Knockback(Vector3 force)
     {
-        Debug.Log("<color=red><b>[CRITICAL IMPACT]</b></color> Dramatic Camera Focus on Player!");
+        _hitCount++;
+        Debug.Log($"<color=red><b>[CRITICAL IMPACT]</b></color> Hit Count: {_hitCount}/{MaxHits}");
+        
         _impactVelocity = force;
         _impactTimer = 1.5f;
         
-        // Smart City Dramatic Effect: Slow motion on hit
         StartCoroutine(DramaticImpactEffect());
     }
 
@@ -43,13 +48,20 @@ public class PlayerHitResponse : MonoBehaviour
         if (_tpController != null) _tpController.enabled = false;
 
         // Wait for a brief moment in real-time
-        yield return new WaitForSecondsRealtime(0.5f);
+        yield return new WaitForSecondsRealtime(1.0f);
 
         // Restore time
         Time.timeScale = 1.0f;
         Time.fixedDeltaTime = 0.02f;
 
-        yield return new WaitForSeconds(1f);
-        if (_tpController != null) _tpController.enabled = true;
+        if (_hitCount >= MaxHits)
+        {
+            Debug.Log("<color=yellow><b>[SCENE TRANSITION]</b></color> Loading Zebra Scene...");
+            SceneManager.LoadScene("zebra");
+        }
+        else
+        {
+            if (_tpController != null) _tpController.enabled = true;
+        }
     }
 }

@@ -12,7 +12,43 @@ public class SceneSetupTool : EditorWindow
         SetupTrafficLights();
         SetupStreetLights();
         SetupParkingSpots();
-        Debug.Log("Scene Setup Complete!");
+        SetupPlayerResponse();
+        SetupTimer();
+        SetupMusic();
+        Debug.Log("Scene Setup Complete! 30s timer and Music Manager active.");
+    }
+
+    static void SetupMusic()
+    {
+        var musicObj = GameObject.Find("GlobalMusicManager");
+        if (musicObj == null)
+        {
+            musicObj = new GameObject("GlobalMusicManager");
+            musicObj.AddComponent<MusicManager>();
+            Debug.Log("Initialized Global Music Manager. You can now drag your music into the 'Background Music' slot in the Inspector.");
+        }
+    }
+
+    static void SetupTimer()
+    {
+        var timerObj = GameObject.Find("SceneTeleporter");
+        if (timerObj == null)
+        {
+            timerObj = new GameObject("SceneTeleporter");
+            timerObj.AddComponent<SceneTimer>();
+            Debug.Log("Initialized 15-second Teleport Timer");
+        }
+    }
+
+    static void SetupPlayerResponse()
+    {
+        var player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+        {
+            if (player.GetComponent<PlayerHitResponse>() == null)
+                player.AddComponent<PlayerHitResponse>();
+            Debug.Log("Added Hit Response to Player");
+        }
     }
 
     static void SetupNPCs()
