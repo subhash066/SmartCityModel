@@ -3,7 +3,7 @@ using UnityEditor;
 
 public class SetupCity : EditorWindow
 {
-    [MenuItem("Tools/Setup Everything _%#s")]
+    [MenuItem("Tools/Setup City and Roads _%#c")]
     public static void Setup()
     {
         // Step 1: Ground

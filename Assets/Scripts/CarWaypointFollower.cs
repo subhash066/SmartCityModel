@@ -14,6 +14,14 @@ public class CarWaypointFollower : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            // Make kinematic to prevent gravity and physics friction from causing shaking
+            rb.isKinematic = true;
+            // Enable interpolation to ensure buttery smooth movement matching the rendering frame rate
+            rb.interpolation = RigidbodyInterpolation.Interpolate;
+        }
+
         if (waypoints == null || waypoints.Length == 0)
             enabled = false;
     }
@@ -46,7 +54,15 @@ public class CarWaypointFollower : MonoBehaviour
         {
             Vector3 centerCorrection = (projection - transform.position);
             centerCorrection.y = 0;
-            direction = Vector3.Lerp(direction, centerCorrection.normalized, 0.4f).normalized;
+            
+            float deviation = centerCorrection.magnitude;
+            if (deviation > 0.01f)
+            {
+                // Smooth out the steering correction by scaling the Lerp weight proportional to the deviation distance.
+                // This prevents the car from rapidly oscillating/wobbling back and forth across the center line.
+                float correctionWeight = Mathf.Min(deviation * 1.5f, 1f) * 0.35f;
+                direction = Vector3.Lerp(direction, centerCorrection / deviation, correctionWeight).normalized;
+            }
 
             Vector3 nextPos = transform.position + direction * speed * Time.fixedDeltaTime;
             // Removed ground snapping as requested to fix shaking
