@@ -8,15 +8,17 @@ public class Crash : MonoBehaviour
     [Header("Collision Settings")]
     public string playerTag = "Player";
     public string carTag = "Car";
-    public float detectionRadius = 2f;
+    public float detectionRadius = 1.5f;
     
     private int collisionCount = 0;
     private bool isInitialized = false;
-    private float checkInterval = 0.2f;
+    private float checkInterval = 0.5f;
     private float checkTimer = 0f;
     private float startupDelay = 3f;
     private float timeSinceStart = 0f;
     private bool detectionActive = false;
+    private float crashCooldown = 2f;
+    private float lastCrashTime = -10f;
 
     void Awake()
     {
@@ -82,6 +84,9 @@ public class Crash : MonoBehaviour
 
     void DetectNearbyObjects()
     {
+        // Check cooldown
+        if (Time.time - lastCrashTime < crashCooldown) return;
+        
         Collider[] nearbyColliders = Physics.OverlapSphere(transform.position, detectionRadius);
         
         foreach (Collider col in nearbyColliders)
@@ -92,13 +97,24 @@ public class Crash : MonoBehaviour
             if (col.CompareTag(carTag) || col.GetComponent<CarWaypointFollower>() != null)
             {
                 float distance = Vector3.Distance(transform.position, col.transform.position);
-                if (distance <= detectionRadius * 0.5f) // Close enough to count as crash
+                
+                // Only trigger if VERY close (actual crash distance)
+                if (distance <= 1.2f)
                 {
+                    collisionCount++;
+                    lastCrashTime = Time.time;
+                    
                     if (enableDebugLogs)
                     {
-                        Debug.Log("<color=red><b>[CRASH SYSTEM]</b></color> *** CLOSE TO CAR: " + col.gameObject.name + " (distance: " + distance.ToString("F2") + "m) ***");
+                        Debug.Log("<color=red><b>[CRASH SYSTEM]</b></color> *** CAR CRASH! Distance: " + distance.ToString("F2") + "m ***");
                     }
                     HandleCarCrashDirect(col);
+                    return; // Exit after first crash
+                }
+                else if (enableDebugLogs && distance <= detectionRadius && Time.frameCount % 60 == 0)
+                {
+                    // Log nearby cars but don't trigger crash (throttled)
+                    Debug.Log("<color=gray><b>[CRASH SYSTEM]</b></color> Car nearby but too far: " + distance.ToString("F2") + "m (need < 1.2m)");
                 }
             }
         }
@@ -214,13 +230,10 @@ public class Crash : MonoBehaviour
 
     void HandleCarCrashDirect(Collider carCollider)
     {
-        Debug.Log("<color=red><b>[CRASH SYSTEM]</b></color> Direct car crash detected with: " + carCollider.gameObject.name);
+        Debug.Log("<color=red><b>[CRASH SYSTEM]</b></color> Car crash with: " + carCollider.gameObject.name);
         
-        var renderer = carCollider.GetComponent<Renderer>();
-        if (renderer != null)
-        {
-            StartCoroutine(FlashRendererColor(renderer));
-        }
+        // Simple visual feedback - don't flash materials to avoid lag
+        // You can add particles/sounds here later
     }
 
     System.Collections.IEnumerator FlashColor()
