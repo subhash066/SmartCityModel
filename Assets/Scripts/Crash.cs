@@ -14,6 +14,9 @@ public class Crash : MonoBehaviour
     private bool isInitialized = false;
     private float checkInterval = 0.2f;
     private float checkTimer = 0f;
+    private float startupDelay = 3f;
+    private float timeSinceStart = 0f;
+    private bool detectionActive = false;
 
     void Awake()
     {
@@ -37,9 +40,8 @@ public class Crash : MonoBehaviour
         {
             Debug.LogWarning("<color=yellow><b>[CRASH SYSTEM]</b></color> No Rigidbody found. Adding one for collision detection.");
             rb = gameObject.AddComponent<Rigidbody>();
-            rb.isKinematic = false;
+            rb.isKinematic = true;
             rb.useGravity = false;
-            rb.constraints = RigidbodyConstraints.FreezeAll;
         }
         
         isInitialized = true;
@@ -53,6 +55,20 @@ public class Crash : MonoBehaviour
 
     void Update()
     {
+        timeSinceStart += Time.deltaTime;
+        
+        // Wait for startup delay before enabling detection
+        if (!detectionActive && timeSinceStart >= startupDelay)
+        {
+            detectionActive = true;
+            if (enableDebugLogs)
+            {
+                Debug.Log("<color=green><b>[CRASH SYSTEM]</b></color> Detection now ACTIVE (startup delay complete)");
+            }
+        }
+        
+        if (!detectionActive) return;
+        
         // Fallback: Use sphere overlap to detect nearby objects
         checkTimer += Time.deltaTime;
         if (checkTimer >= checkInterval)
