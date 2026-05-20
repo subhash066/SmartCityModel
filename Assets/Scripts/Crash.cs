@@ -22,26 +22,22 @@ public class Crash : MonoBehaviour
     {
         Debug.Log("<color=green><b>[CRASH SYSTEM]</b></color> Crash script initialized on: " + gameObject.name);
         
-        // Verify collider setup
+        // Verify collider setup (CharacterController also counts)
         Collider col = GetComponent<Collider>();
-        if (col == null)
+        CharacterController cc = GetComponent<CharacterController>();
+        
+        if (col == null && cc == null)
         {
-            Debug.LogError("<color=red><b>[CRASH SYSTEM]</b></color> NO COLLIDER FOUND! Adding SphereCollider.");
+            Debug.LogWarning("<color=yellow><b>[CRASH SYSTEM]</b></color> No Collider or CharacterController found. Adding SphereCollider.");
             gameObject.AddComponent<SphereCollider>();
+        }
+        else if (cc != null)
+        {
+            Debug.Log("<color=green><b>[CRASH SYSTEM]</b></color> CharacterController found (this is fine for player)");
         }
         else
         {
             Debug.Log("<color=green><b>[CRASH SYSTEM]</b></color> Collider found: " + col.GetType().Name + " (isTrigger: " + col.isTrigger + ")");
-        }
-        
-        // Check if Rigidbody exists
-        Rigidbody rb = GetComponent<Rigidbody>();
-        if (rb == null)
-        {
-            Debug.LogWarning("<color=yellow><b>[CRASH SYSTEM]</b></color> No Rigidbody found. Adding one for collision detection.");
-            rb = gameObject.AddComponent<Rigidbody>();
-            rb.isKinematic = true;
-            rb.useGravity = false;
         }
         
         isInitialized = true;
