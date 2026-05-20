@@ -11,9 +11,12 @@ public class CarCrashDetector : MonoBehaviour
         
         if (!collision.gameObject.CompareTag("Player")) return;
         
+        float distance = Vector3.Distance(transform.position, collision.transform.position);
+        if (distance > 1f) return;
+        
         lastCrashTime = Time.time;
         
-        Debug.Log("<color=red><b>[CAR CRASH]</b></color> HIT PLAYER!");
+        Debug.Log("<color=red><b>[CAR CRASH]</b></color> HIT PLAYER! Distance: " + distance.ToString("F2") + "m");
         
         var playerResponse = collision.gameObject.GetComponent<PlayerHitResponse>();
         if (playerResponse != null)
