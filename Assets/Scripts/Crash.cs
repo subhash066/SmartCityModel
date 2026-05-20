@@ -8,9 +8,12 @@ public class Crash : MonoBehaviour
     [Header("Collision Settings")]
     public string playerTag = "Player";
     public string carTag = "Car";
+    public float detectionRadius = 2f;
     
     private int collisionCount = 0;
     private bool isInitialized = false;
+    private float checkInterval = 0.2f;
+    private float checkTimer = 0f;
 
     void Awake()
     {
@@ -20,7 +23,8 @@ public class Crash : MonoBehaviour
         Collider col = GetComponent<Collider>();
         if (col == null)
         {
-            Debug.LogError("<color=red><b>[CRASH SYSTEM]</b></color> NO COLLIDER FOUND! Add a Collider to this object.");
+            Debug.LogError("<color=red><b>[CRASH SYSTEM]</b></color> NO COLLIDER FOUND! Adding SphereCollider.");
+            gameObject.AddComponent<SphereCollider>();
         }
         else
         {
@@ -33,7 +37,9 @@ public class Crash : MonoBehaviour
         {
             Debug.LogWarning("<color=yellow><b>[CRASH SYSTEM]</b></color> No Rigidbody found. Adding one for collision detection.");
             rb = gameObject.AddComponent<Rigidbody>();
-            rb.isKinematic = true;
+            rb.isKinematic = false;
+            rb.useGravity = false;
+            rb.constraints = RigidbodyConstraints.FreezeAll;
         }
         
         isInitialized = true;
@@ -47,10 +53,42 @@ public class Crash : MonoBehaviour
 
     void Update()
     {
+        // Fallback: Use sphere overlap to detect nearby objects
+        checkTimer += Time.deltaTime;
+        if (checkTimer >= checkInterval)
+        {
+            checkTimer = 0f;
+            DetectNearbyObjects();
+        }
+        
         // Visual debug indicator
-        if (enableDebugLogs && Time.frameCount % 60 == 0)
+        if (enableDebugLogs && Time.frameCount % 120 == 0)
         {
             Debug.Log("<color=cyan><b>[CRASH SYSTEM]</b></color> Still active. Collisions detected: " + collisionCount);
+        }
+    }
+
+    void DetectNearbyObjects()
+    {
+        Collider[] nearbyColliders = Physics.OverlapSphere(transform.position, detectionRadius);
+        
+        foreach (Collider col in nearbyColliders)
+        {
+            if (col.gameObject == gameObject) continue;
+            
+            // Check for cars
+            if (col.CompareTag(carTag) || col.GetComponent<CarWaypointFollower>() != null)
+            {
+                float distance = Vector3.Distance(transform.position, col.transform.position);
+                if (distance <= detectionRadius * 0.5f) // Close enough to count as crash
+                {
+                    if (enableDebugLogs)
+                    {
+                        Debug.Log("<color=red><b>[CRASH SYSTEM]</b></color> *** CLOSE TO CAR: " + col.gameObject.name + " (distance: " + distance.ToString("F2") + "m) ***");
+                    }
+                    HandleCarCrashDirect(col);
+                }
+            }
         }
     }
 
@@ -74,8 +112,6 @@ public class Crash : MonoBehaviour
             {
                 Debug.Log("<color=yellow><b>[CRASH SYSTEM]</b></color> Contact at: " + contact.point);
             }
-            // Draw debug sphere at contact point
-            Debug.DrawSphere(contact.point, 0.2f, Color.red, 2.0f);
         }
 
         // Check for Player
@@ -161,8 +197,18 @@ public class Crash : MonoBehaviour
             StartCoroutine(FlashColor());
         }
         
-        // You can add more crash effects here (sound, particles, etc.)
         Debug.Log("<color=red><b>[CRASH SYSTEM]</b></color> Car crash processed!");
+    }
+
+    void HandleCarCrashDirect(Collider carCollider)
+    {
+        Debug.Log("<color=red><b>[CRASH SYSTEM]</b></color> Direct car crash detected with: " + carCollider.gameObject.name);
+        
+        var renderer = carCollider.GetComponent<Renderer>();
+        if (renderer != null)
+        {
+            StartCoroutine(FlashRendererColor(renderer));
+        }
     }
 
     System.Collections.IEnumerator FlashColor()
@@ -179,11 +225,27 @@ public class Crash : MonoBehaviour
         renderer.material.color = originalColor;
     }
 
+    System.Collections.IEnumerator FlashRendererColor(Renderer renderer)
+    {
+        Material mat = renderer.material;
+        Color originalColor = mat.color;
+        
+        mat.color = Color.red;
+        yield return new WaitForSeconds(0.1f);
+        mat.color = Color.yellow;
+        yield return new WaitForSeconds(0.1f);
+        mat.color = originalColor;
+    }
+
     void OnDrawGizmos()
     {
-        // Draw a sphere around this object to show detection area
+        // Draw detection radius
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, 1.0f);
+        Gizmos.DrawWireSphere(transform.position, detectionRadius);
+        
+        // Draw close detection radius
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, detectionRadius * 0.5f);
     }
 
     void OnDrawGizmosSelected()
